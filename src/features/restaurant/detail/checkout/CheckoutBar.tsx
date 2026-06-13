@@ -1,3 +1,9 @@
+import Image from 'next/image';
+
+import CartIcon from '@/assets/images/navbar/cart-dark.svg';
+
+import { PageContainer } from '@/components/layout/PageContainer';
+
 type Props = {
   totalItems: number;
   totalPrice: number;
@@ -17,54 +23,59 @@ export function CheckoutBar({ totalItems, totalPrice }: Props) {
         right-0
         z-50
         border-t
-        bg-white
-        shadow-lg
+        border-border
+        bg-background/95
+        backdrop-blur-sm
       '
     >
-      <div
-        className='
-          mx-auto
-          flex
-          max-w-360
-          items-center
-          justify-between
-          px-8
-          py-4
-        '
-      >
-        <div>
-          <p
-            className='
+      <PageContainer>
+        <div
+          className='
+            flex
+            min-h-24
+            items-center
+            justify-between
+          '
+        >
+          <div>
+            <div className='flex items-center gap-3'>
+              <Image src={CartIcon} alt='Cart' width={20} height={20} />
+
+              <p
+                className='
               text-sm
               text-muted-foreground
             '
-          >
-            {totalItems} Items
-          </p>
-
-          <p
-            className='
+              >
+                {totalItems} Items
+              </p>
+            </div>
+            <p
+              className='
               text-2xl
               font-extrabold
             '
-          >
-            Rp{totalPrice.toLocaleString('id-ID')}
-          </p>
-        </div>
+            >
+              Rp{totalPrice.toLocaleString('id-ID')}
+            </p>
+          </div>
 
-        <button
-          className='
+          <button
+            className='
             rounded-full
             bg-primary
             px-12
             py-3
             font-bold
-            text-white
+            text-primary-foreground
+            transition-colors
+            hover:opacity-90
           '
-        >
-          Checkout
-        </button>
-      </div>
+          >
+            Checkout
+          </button>
+        </div>
+      </PageContainer>
     </div>
   );
 }
