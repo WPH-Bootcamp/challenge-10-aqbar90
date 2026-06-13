@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useRestaurants } from '../hooks/useRestaurants';
 import { useCategoryStore } from '../stores/category-store';
@@ -15,6 +15,10 @@ export function RestaurantSection() {
   const { data, isLoading, isError } = useRestaurants(selectedCategory);
 
   const [visibleCount, setVisibleCount] = useState(INITIAL_LIMIT);
+
+  useEffect(() => {
+    setVisibleCount(INITIAL_LIMIT);
+  }, [selectedCategory]);
 
   console.log('API RESPONSE', data);
   console.log('TOTAL RESTAURANTS', data?.data?.restaurants?.length);
