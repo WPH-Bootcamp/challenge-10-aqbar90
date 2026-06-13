@@ -8,6 +8,7 @@ import { RestaurantGallery } from '@/features/restaurant/detail/gallery/Restaura
 import { RestaurantHeader } from '@/features/restaurant/detail/header/RestaurantDetailHeader';
 
 import { useRestaurantDetail } from '@/features/restaurant/detail/hooks/useRestaurantDetail';
+import { RestaurantMenuSection } from '@/features/restaurant/detail/menu/RestaurantMenuSection';
 
 type Props = {
   params: Promise<{
@@ -50,6 +51,8 @@ export default function RestaurantDetailPage({ params }: Props) {
 
         <hr className='border-border' />
       </div>
+
+      <RestaurantMenuSection menus={restaurant.menus} />
     </PageContainer>
   );
 }
