@@ -7,6 +7,8 @@ import { MenuFilter } from './MenuFilter';
 
 import type { RestaurantMenu } from '../types/restaurant-detail.types';
 
+import { CheckoutBar } from '@/features/restaurant/detail/checkout/CheckoutBar';
+
 type Props = {
   menus: RestaurantMenu[];
 };
@@ -49,6 +51,17 @@ export function RestaurantMenuSection({ menus }: Props) {
     });
   };
 
+  const totalItems = Object.values(quantities).reduce(
+    (sum, qty) => sum + qty,
+    0
+  );
+
+  const totalPrice = menus.reduce((total, menu) => {
+    const quantity = quantities[menu.id] || 0;
+
+    return total + menu.price * quantity;
+  }, 0);
+
   const [selected, setSelected] = useState<'all' | 'food' | 'drink'>('all');
 
   const [visibleCount, setVisibleCount] = useState(INITIAL_LIMIT);
@@ -72,6 +85,7 @@ export function RestaurantMenuSection({ menus }: Props) {
         flex-col
         items-center
         gap-8
+        pb-32
       '
     >
       <div className='w-full space-y-6'>
@@ -122,6 +136,7 @@ export function RestaurantMenuSection({ menus }: Props) {
           Show More
         </button>
       )}
+      <CheckoutBar totalItems={totalItems} totalPrice={totalPrice} />
     </section>
   );
 }
