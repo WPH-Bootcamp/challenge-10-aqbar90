@@ -9,6 +9,12 @@ import type { RestaurantMenu } from '../types/restaurant-detail.types';
 
 import { CheckoutBar } from '@/features/restaurant/detail/checkout/CheckoutBar';
 
+import {
+  useCartStore,
+  useCartTotalItems,
+  useCartTotalPrice,
+} from '@/features/cart/stores/cart-store';
+
 type Props = {
   menus: RestaurantMenu[];
 };
@@ -18,49 +24,17 @@ const INITIAL_LIMIT = 8;
 const LOAD_MORE_STEP = 4;
 
 export function RestaurantMenuSection({ menus }: Props) {
-  const [quantities, setQuantities] = useState<Record<number, number>>({});
+  const addItem = useCartStore((state) => state.addItem);
 
-  const handleAddItem = (menuId: number) => {
-    setQuantities((prev) => ({
-      ...prev,
-      [menuId]: 1,
-    }));
-  };
+  const increaseQuantity = useCartStore((state) => state.increaseQuantity);
 
-  const increaseQuantity = (menuId: number) => {
-    setQuantities((prev) => ({
-      ...prev,
-      [menuId]: (prev[menuId] || 0) + 1,
-    }));
-  };
+  const decreaseQuantity = useCartStore((state) => state.decreaseQuantity);
 
-  const decreaseQuantity = (menuId: number) => {
-    setQuantities((prev) => {
-      const current = prev[menuId] || 0;
+  const getItemQuantity = useCartStore((state) => state.getItemQuantity);
 
-      if (current <= 1) {
-        const next = { ...prev };
-        delete next[menuId];
-        return next;
-      }
+  const totalItems = useCartTotalItems();
 
-      return {
-        ...prev,
-        [menuId]: current - 1,
-      };
-    });
-  };
-
-  const totalItems = Object.values(quantities).reduce(
-    (sum, qty) => sum + qty,
-    0
-  );
-
-  const totalPrice = menus.reduce((total, menu) => {
-    const quantity = quantities[menu.id] || 0;
-
-    return total + menu.price * quantity;
-  }, 0);
+  const totalPrice = useCartTotalPrice();
 
   const [selected, setSelected] = useState<'all' | 'food' | 'drink'>('all');
 
@@ -77,6 +51,10 @@ export function RestaurantMenuSection({ menus }: Props) {
   const visibleMenus = filteredMenus.slice(0, visibleCount);
 
   const hasMore = visibleCount < filteredMenus.length;
+
+  const items = useCartStore((state) => state.items);
+
+  console.log(items);
 
   return (
     <section
@@ -114,12 +92,20 @@ export function RestaurantMenuSection({ menus }: Props) {
           <MenuCard
             key={menu.id}
             menu={menu}
-            quantity={quantities[menu.id] || 0}
-            onAdd={() => handleAddItem(menu.id)}
+            quantity={getItemQuantity(menu.id)}
+            onAdd={() =>
+              addItem({
+                id: menu.id,
+                foodName: menu.foodName,
+                price: menu.price,
+                image: menu.image,
+              })
+            }
             onIncrease={() => increaseQuantity(menu.id)}
             onDecrease={() => decreaseQuantity(menu.id)}
           />
         ))}
+        <CheckoutBar totalItems={totalItems} totalPrice={totalPrice} />
       </div>
 
       {hasMore && (
@@ -136,7 +122,6 @@ export function RestaurantMenuSection({ menus }: Props) {
           Show More
         </button>
       )}
-      <CheckoutBar totalItems={totalItems} totalPrice={totalPrice} />
     </section>
   );
 }
