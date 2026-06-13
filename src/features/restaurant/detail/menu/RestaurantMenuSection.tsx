@@ -16,6 +16,39 @@ const INITIAL_LIMIT = 8;
 const LOAD_MORE_STEP = 4;
 
 export function RestaurantMenuSection({ menus }: Props) {
+  const [quantities, setQuantities] = useState<Record<number, number>>({});
+
+  const handleAddItem = (menuId: number) => {
+    setQuantities((prev) => ({
+      ...prev,
+      [menuId]: 1,
+    }));
+  };
+
+  const increaseQuantity = (menuId: number) => {
+    setQuantities((prev) => ({
+      ...prev,
+      [menuId]: (prev[menuId] || 0) + 1,
+    }));
+  };
+
+  const decreaseQuantity = (menuId: number) => {
+    setQuantities((prev) => {
+      const current = prev[menuId] || 0;
+
+      if (current <= 1) {
+        const next = { ...prev };
+        delete next[menuId];
+        return next;
+      }
+
+      return {
+        ...prev,
+        [menuId]: current - 1,
+      };
+    });
+  };
+
   const [selected, setSelected] = useState<'all' | 'food' | 'drink'>('all');
 
   const [visibleCount, setVisibleCount] = useState(INITIAL_LIMIT);
@@ -64,7 +97,14 @@ export function RestaurantMenuSection({ menus }: Props) {
         '
       >
         {visibleMenus.map((menu) => (
-          <MenuCard key={menu.id} menu={menu} />
+          <MenuCard
+            key={menu.id}
+            menu={menu}
+            quantity={quantities[menu.id] || 0}
+            onAdd={() => handleAddItem(menu.id)}
+            onIncrease={() => increaseQuantity(menu.id)}
+            onDecrease={() => decreaseQuantity(menu.id)}
+          />
         ))}
       </div>
 
