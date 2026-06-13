@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import cartWhite from '@/assets/images/navbar/cart-white.svg';
 import cartBlack from '@/assets/images/navbar/cart-dark.svg';
-import defaultAvatar from '@/assets/images/navbar/profile.png';
+import defaultAvatar from '@/assets/images/navbar/default-avatar.svg';
 
 import { useAuthStore } from '@/stores/auth-store';
 import { UserDropdown } from './UserDropDown';

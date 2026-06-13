@@ -9,6 +9,7 @@ import { RestaurantHeader } from '@/features/restaurant/detail/header/Restaurant
 
 import { useRestaurantDetail } from '@/features/restaurant/detail/hooks/useRestaurantDetail';
 import { RestaurantMenuSection } from '@/features/restaurant/detail/menu/RestaurantMenuSection';
+import { RestaurantReviewSection } from '@/features/restaurant/detail/review/RestaurantReviewSection';
 
 type Props = {
   params: Promise<{
@@ -53,6 +54,13 @@ export default function RestaurantDetailPage({ params }: Props) {
       </div>
 
       <RestaurantMenuSection menus={restaurant.menus} />
+
+      <hr className='border-border' />
+
+      <RestaurantReviewSection
+        reviews={restaurant.reviews}
+        rating={restaurant.averageRating}
+      />
     </PageContainer>
   );
 }
