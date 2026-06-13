@@ -1,7 +1,5 @@
 'use client';
 
-import { useState } from 'react';
-
 import Image from 'next/image';
 import { Minus, Plus } from 'lucide-react';
 
@@ -9,11 +7,19 @@ import type { RestaurantMenu } from '../types/restaurant-detail.types';
 
 type Props = {
   menu: RestaurantMenu;
+  quantity: number;
+  onAdd: () => void;
+  onIncrease: () => void;
+  onDecrease: () => void;
 };
 
-export function MenuCard({ menu }: Props) {
-  const [quantity, setQuantity] = useState(0);
-
+export function MenuCard({
+  menu,
+  quantity,
+  onAdd,
+  onDecrease,
+  onIncrease,
+}: Props) {
   return (
     <article
       className='
@@ -65,7 +71,7 @@ export function MenuCard({ menu }: Props) {
 
         {quantity === 0 ? (
           <button
-            onClick={() => setQuantity(1)}
+            onClick={onAdd}
             className='
               rounded-full
               bg-primary
@@ -86,7 +92,7 @@ export function MenuCard({ menu }: Props) {
             '
           >
             <button
-              onClick={() => setQuantity((prev) => Math.max(0, prev - 1))}
+              onClick={onDecrease}
               className='
                 flex
                 size-10
@@ -109,7 +115,7 @@ export function MenuCard({ menu }: Props) {
             </span>
 
             <button
-              onClick={() => setQuantity((prev) => prev + 1)}
+              onClick={onIncrease}
               className='
                 flex
                 size-10
