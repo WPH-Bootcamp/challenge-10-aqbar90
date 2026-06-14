@@ -1,19 +1,32 @@
 import { Star } from 'lucide-react';
 
+import { Checkbox } from '@/components/ui/checkbox';
+
 import type { RestaurantFilters } from '@/features/restaurant/types/restaurant.types';
 
 type Props = {
   filters: RestaurantFilters;
-  onRatingChange: (rating: number) => void;
+  setFilters: React.Dispatch<React.SetStateAction<RestaurantFilters>>;
 };
 
-export function RatingFilter({ filters, onRatingChange }: Props) {
+export function RatingFilter({ filters, setFilters }: Props) {
+  const handleRatingChange = (rating: number) => {
+    setFilters((prev) => ({
+      ...prev,
+      rating: prev.rating === rating ? undefined : rating,
+      page: 1,
+    }));
+  };
+
   return (
     <section className='space-y-4'>
       <h3
         className='
-          text-lg
-          font-extrabold
+          text-sm
+          leading-sm
+          md:text-lg
+          md:leading-lg
+          font-medium
         '
       >
         Rating
@@ -22,10 +35,13 @@ export function RatingFilter({ filters, onRatingChange }: Props) {
       <div className='space-y-3'>
         {[5, 4, 3, 2, 1].map((rating) => (
           <label key={rating} className='flex items-center gap-3'>
-            <input
-              type='checkbox'
+            <Checkbox
               checked={filters.rating === rating}
-              onChange={() => onRatingChange(rating)}
+              onCheckedChange={() => handleRatingChange(rating)}
+              className='
+              data-[state=checked]:border-primary
+              data-[state=checked]:bg-primary
+            '
             />
 
             <div className='flex items-center gap-1'>

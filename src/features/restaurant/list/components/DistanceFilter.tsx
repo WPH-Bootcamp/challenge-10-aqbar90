@@ -1,3 +1,5 @@
+import { Checkbox } from '@/components/ui/checkbox';
+
 import type { RestaurantFilters } from '@/features/restaurant/types/restaurant.types';
 
 type Props = {
@@ -17,8 +19,11 @@ export function DistanceFilter({ filters, setFilters }: Props) {
     <section className='space-y-4'>
       <h3
         className='
-          text-lg
-          font-extrabold
+          text-sm
+          ledaing-sm
+          md:text-lg
+          md:leading-lg
+          font-normal
         '
       >
         Distance
@@ -28,7 +33,7 @@ export function DistanceFilter({ filters, setFilters }: Props) {
         {[
           {
             label: 'Nearby',
-            value: 1,
+            value: 0,
           },
           {
             label: 'Within 1 km',
@@ -43,11 +48,14 @@ export function DistanceFilter({ filters, setFilters }: Props) {
             value: 5,
           },
         ].map((item) => (
-          <label key={item.label} className='flex items-center gap-3'>
-            <input
-              type='checkbox'
+          <label key={item.value} className='flex items-center gap-3'>
+            <Checkbox
               checked={filters.range === item.value}
-              onChange={() => handleRangeChange(item.value)}
+              onCheckedChange={() => handleRangeChange(item.value)}
+              className='
+              data-[state=checked]:border-primary
+              data-[state=checked]:bg-primary
+            '
             />
 
             <span>{item.label}</span>

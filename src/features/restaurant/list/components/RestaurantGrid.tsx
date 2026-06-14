@@ -56,7 +56,10 @@ export function RestaurantGrid({ category, filters }: Props) {
         <h3
           className='
           mb-2
-          text-xl
+          text-md
+          leading-md
+          md:text-xl
+          md:leading-xl
           font-bold
         '
         >

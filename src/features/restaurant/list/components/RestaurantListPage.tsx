@@ -6,6 +6,8 @@ import { RestaurantFilterSidebar } from '@/features/restaurant/list/components/R
 import { RestaurantGrid } from '@/features/restaurant/list/components/RestaurantGrid';
 import { useRestaurantFilters } from '../hooks/useRestaurantFilters';
 
+import { MobileFilterSheet } from '@/features/restaurant/list/components/MobileFilterSheet';
+
 export function RestaurantListPage() {
   const { filters, setFilters } = useRestaurantFilters();
 
@@ -20,12 +22,17 @@ export function RestaurantListPage() {
         <h1
           className='
             mb-8
-            text-display-md
+            text-display-xs
+            leading-display-xs
+            md:text-display-md
+            md:leading-display-md
             font-extrabold
           '
         >
           All Restaurant
         </h1>
+
+        <MobileFilterSheet filters={filters} setFilters={setFilters} />
 
         <div
           className='
