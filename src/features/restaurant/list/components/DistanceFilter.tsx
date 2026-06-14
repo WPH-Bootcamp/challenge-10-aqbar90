@@ -19,8 +19,11 @@ export function DistanceFilter({ filters, setFilters }: Props) {
     <section className='space-y-4'>
       <h3
         className='
-          text-lg
-          font-extrabold
+          text-sm
+          ledaing-sm
+          md:text-lg
+          md:leading-lg
+          font-normal
         '
       >
         Distance

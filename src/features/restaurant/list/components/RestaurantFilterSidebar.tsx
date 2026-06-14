@@ -12,14 +12,6 @@ type Props = {
 };
 
 export function RestaurantFilterSidebar({ filters, setFilters }: Props) {
-  const handleRatingChange = (rating: number) => {
-    setFilters((prev) => ({
-      ...prev,
-      rating: prev.rating === rating ? undefined : rating,
-      page: 1,
-    }));
-  };
-
   const handleClearFilters = () => {
     setFilters(DEFAULT_FILTERS);
   };
@@ -48,6 +40,7 @@ export function RestaurantFilterSidebar({ filters, setFilters }: Props) {
           <h2
             className='
             text-sm
+            leading-sm
             font-extrabold
             uppercase
           '
@@ -76,7 +69,7 @@ export function RestaurantFilterSidebar({ filters, setFilters }: Props) {
 
         <hr className='my-6 border-border' />
 
-        <RatingFilter filters={filters} onRatingChange={handleRatingChange} />
+        <RatingFilter filters={filters} setFilters={setFilters} />
       </div>
     </aside>
   );

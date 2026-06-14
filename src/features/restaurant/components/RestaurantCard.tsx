@@ -48,7 +48,7 @@ export function RestaurantCard({ restaurant }: Props) {
           <h3
             className='
             line-clamp-1
-            text-sm
+            text-md
             font-extrabold
             md:text-lg
           '
