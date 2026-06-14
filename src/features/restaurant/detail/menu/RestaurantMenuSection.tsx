@@ -9,13 +9,14 @@ import type { RestaurantMenu } from '../types/restaurant-detail.types';
 
 import { CheckoutBar } from '@/features/restaurant/detail/checkout/CheckoutBar';
 
-import {
-  useCartStore,
-  useCartTotalItems,
-  useCartTotalPrice,
-} from '@/features/cart/stores/cart-store';
+import { useAddToCart } from '@/features/cart/hooks/useAddToCart';
+
+import { useCart } from '@/features/cart/hooks/useCart';
+
+import { useUpdateCart } from '@/features/cart/hooks/useUpdateCart';
 
 type Props = {
+  restaurantId: number;
   menus: RestaurantMenu[];
 };
 
@@ -23,18 +24,12 @@ const INITIAL_LIMIT = 8;
 
 const LOAD_MORE_STEP = 4;
 
-export function RestaurantMenuSection({ menus }: Props) {
-  const addItem = useCartStore((state) => state.addItem);
+export function RestaurantMenuSection({ menus, restaurantId }: Props) {
+  const { mutate: updateCart } = useUpdateCart();
 
-  const increaseQuantity = useCartStore((state) => state.increaseQuantity);
+  const { data: cartData } = useCart();
 
-  const decreaseQuantity = useCartStore((state) => state.decreaseQuantity);
-
-  const getItemQuantity = useCartStore((state) => state.getItemQuantity);
-
-  const totalItems = useCartTotalItems();
-
-  const totalPrice = useCartTotalPrice();
+  const { mutate: addToCart } = useAddToCart();
 
   const [selected, setSelected] = useState<'all' | 'food' | 'drink'>('all');
 
@@ -52,9 +47,11 @@ export function RestaurantMenuSection({ menus }: Props) {
 
   const hasMore = visibleCount < filteredMenus.length;
 
-  const items = useCartStore((state) => state.items);
-
-  console.log(items);
+  const getBackendCartItem = (menuId: number) => {
+    return cartData?.data.cart
+      .flatMap((group) => group.items)
+      .find((item) => item.menu.id === menuId);
+  };
 
   return (
     <section
@@ -91,20 +88,48 @@ export function RestaurantMenuSection({ menus }: Props) {
           <MenuCard
             key={menu.id}
             menu={menu}
-            quantity={getItemQuantity(menu.id)}
-            onAdd={() =>
-              addItem({
-                id: menu.id,
-                foodName: menu.foodName,
-                price: menu.price,
-                image: menu.image,
-              })
-            }
-            onIncrease={() => increaseQuantity(menu.id)}
-            onDecrease={() => decreaseQuantity(menu.id)}
+            quantity={getBackendCartItem(menu.id)?.quantity ?? 0}
+            onAdd={() => {
+              addToCart({
+                restaurantId,
+                menuId: menu.id,
+                quantity: 1,
+              });
+            }}
+            onIncrease={() => {
+              const cartItem = getBackendCartItem(menu.id);
+
+              if (!cartItem) {
+                return;
+              }
+
+              updateCart({
+                cartItemId: cartItem.id,
+                quantity: cartItem.quantity + 1,
+              });
+            }}
+            onDecrease={() => {
+              const cartItem = getBackendCartItem(menu.id);
+
+              if (!cartItem) {
+                return;
+              }
+
+              if (cartItem.quantity <= 1) {
+                return;
+              }
+
+              updateCart({
+                cartItemId: cartItem.id,
+                quantity: cartItem.quantity - 1,
+              });
+            }}
           />
         ))}
-        <CheckoutBar totalItems={totalItems} totalPrice={totalPrice} />
+        <CheckoutBar
+          totalItems={cartData?.data.summary.totalItems ?? 0}
+          totalPrice={cartData?.data.summary.totalPrice ?? 0}
+        />
       </div>
 
       {hasMore && (

@@ -8,8 +8,6 @@ import defaultAvatar from '@/assets/images/navbar/default-avatar.svg';
 import { useAuthStore } from '@/stores/auth-store';
 import { UserDropdown } from './UserDropDown';
 
-import { useCartTotalItems } from '@/features/cart/stores/cart-store';
-
 type NavbarUserProps = {
   isScrolled: boolean;
 };
@@ -17,8 +15,6 @@ type NavbarUserProps = {
 export function NavbarUser({ isScrolled }: NavbarUserProps) {
   const user = useAuthStore((state) => state.user);
   console.log('USER STORE', user);
-
-  const cartCount = useCartTotalItems();
 
   return (
     <div className=' flex items-center gap-6'>
@@ -30,27 +26,6 @@ export function NavbarUser({ isScrolled }: NavbarUserProps) {
             width={24}
             height={24}
           />
-          {cartCount > 0 && (
-            <span
-              className='
-          absolute
-          -right-2
-          -top-2
-          flex
-          h-5
-          w-5
-          items-center
-          justify-center
-          rounded-full
-          bg-primary
-          text-[10px]
-          font-bold
-          text-primary-foreground
-        '
-            >
-              {cartCount > 99 ? '99+' : cartCount}
-            </span>
-          )}
         </Link>
       </div>
       <UserDropdown>
