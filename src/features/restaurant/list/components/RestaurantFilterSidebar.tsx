@@ -4,6 +4,8 @@ import { RatingFilter } from './RatingFilter';
 
 import type { RestaurantFilters } from '@/features/restaurant/types/restaurant.types';
 
+import { DEFAULT_FILTERS } from '../hooks/useRestaurantFilters';
+
 type Props = {
   filters: RestaurantFilters;
   setFilters: React.Dispatch<React.SetStateAction<RestaurantFilters>>;
@@ -16,6 +18,10 @@ export function RestaurantFilterSidebar({ filters, setFilters }: Props) {
       rating: prev.rating === rating ? undefined : rating,
       page: 1,
     }));
+  };
+
+  const handleClearFilters = () => {
+    setFilters(DEFAULT_FILTERS);
   };
 
   return (
@@ -31,16 +37,36 @@ export function RestaurantFilterSidebar({ filters, setFilters }: Props) {
       '
     >
       <div className='p-6'>
-        <h2
+        <div
           className='
-            mb-6
+          mb-6
+          flex
+          items-center
+          justify-between
+        '
+        >
+          <h2
+            className='
             text-sm
             font-extrabold
             uppercase
           '
-        >
-          Filter
-        </h2>
+          >
+            Filter
+          </h2>
+
+          <button
+            onClick={handleClearFilters}
+            className='
+            text-xs
+            font-semibold
+            text-primary
+            hover:underline
+          '
+          >
+            Clear All
+          </button>
+        </div>
 
         <DistanceFilter filters={filters} setFilters={setFilters} />
 
