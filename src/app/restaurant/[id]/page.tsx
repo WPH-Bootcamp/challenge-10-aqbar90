@@ -55,7 +55,10 @@ export default function RestaurantDetailPage({ params }: Props) {
         <hr className='border-border' />
       </div>
 
-      <RestaurantMenuSection menus={restaurant.menus} />
+      <RestaurantMenuSection
+        restaurantId={restaurant.id}
+        menus={restaurant.menus}
+      />
 
       <hr className='border-border' />
 
