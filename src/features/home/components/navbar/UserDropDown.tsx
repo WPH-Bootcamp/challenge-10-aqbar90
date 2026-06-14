@@ -15,7 +15,7 @@ import { useAuthStore } from '@/stores/auth-store';
 
 import Image from 'next/image';
 
-import defaultAvatar from '@/assets/images/navbar/profile.png';
+import defaultAvatar from '@/assets/images/navbar/default-avatar.svg';
 
 type UserDropdownProps = {
   children: React.ReactNode;
