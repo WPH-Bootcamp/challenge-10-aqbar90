@@ -82,10 +82,9 @@ export function RestaurantMenuSection({ menus }: Props) {
       <div
         className='
           grid
-          grid-cols-1
+          grid-cols-2
           gap-5
-          md:grid-cols-2
-          xl:grid-cols-4
+          md:grid-cols-4
         '
       >
         {visibleMenus.map((menu) => (

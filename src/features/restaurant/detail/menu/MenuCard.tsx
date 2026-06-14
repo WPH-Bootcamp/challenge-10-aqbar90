@@ -35,7 +35,7 @@ export function MenuCard({
         width={285}
         height={285}
         className='
-          h-71.25
+          aspect-square
           w-full
           object-cover
         '
@@ -44,15 +44,21 @@ export function MenuCard({
       <div
         className='
           flex
+          flex-col
           items-center
           justify-between
-          p-4
+          gap-4
+          p-3
+          md:p-4
         '
       >
-        <div>
+        <div className='space-y-1'>
           <h3
             className='
-              text-md
+              text-xs
+              leading-xs
+              md:text-md
+              md:leading-md
               font-medium
             '
           >
@@ -61,7 +67,10 @@ export function MenuCard({
 
           <p
             className='
-              text-lg
+              text-md
+              leading-md
+              md:text-lg
+              md:leadding-lg
               font-extrabold
             '
           >
@@ -73,10 +82,12 @@ export function MenuCard({
           <button
             onClick={onAdd}
             className='
+              h-9
+              w-full
               rounded-full
               bg-primary
-              px-5
-              py-2
+              text-sm
+              leading-sm
               font-bold
               text-white
             '
@@ -88,14 +99,16 @@ export function MenuCard({
             className='
               flex
               items-center
-              gap-4
+              justify-center
+              gap-3
+              md:gap-4
             '
           >
             <button
               onClick={onDecrease}
               className='
                 flex
-                size-10
+                size-9
                 items-center
                 justify-center
                 rounded-full
@@ -107,7 +120,10 @@ export function MenuCard({
 
             <span
               className='
-                text-lg
+                text-md
+                leading-md
+                md:leading-lg
+                md:text-lg
                 font-semibold
               '
             >
@@ -118,7 +134,7 @@ export function MenuCard({
               onClick={onIncrease}
               className='
                 flex
-                size-10
+                size-9
                 items-center
                 justify-center
                 rounded-full

@@ -34,8 +34,11 @@ export function RestaurantReviewSection({ reviews, rating }: Props) {
       <div className='w-full'>
         <h2
           className='
+            text-3xl
+            leading-3xl
             mb-3
-            text-display-lg
+            md:text-display-lg
+            md:leading-display-lg
             font-extrabold
           '
         >
@@ -45,7 +48,8 @@ export function RestaurantReviewSection({ reviews, rating }: Props) {
         <div className='flex items-center gap-1'>
           <Star
             className='
-              size-6
+              size-5
+              md:size-6
               fill-[#FFAB0D]
               text-[#FFAB0D]
             '
@@ -53,7 +57,10 @@ export function RestaurantReviewSection({ reviews, rating }: Props) {
 
           <span
             className='
-              text-xl
+              text-lg
+              leading-lg
+              md:text-xl
+              md:leading-xl
               font-extrabold
             '
           >
@@ -82,9 +89,11 @@ export function RestaurantReviewSection({ reviews, rating }: Props) {
           className='
             rounded-full
             border
-            px-8
-            py-3
-            font-bold
+            h-10
+            w-40
+            text-sm
+            leading-sm
+            font-medium
           '
         >
           Show More
