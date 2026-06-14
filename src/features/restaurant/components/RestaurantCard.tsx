@@ -22,7 +22,7 @@ export function RestaurantCard({ restaurant }: Props) {
         className='
         flex
         items-center
-        gap-3
+        gap-4
         rounded-2xl
         bg-white
         p-4
@@ -39,12 +39,12 @@ export function RestaurantCard({ restaurant }: Props) {
           w-24
           rounded-xl
           object-cover
-          md:h-30
-          md:w-30
+          md:h-26
+          md:w-26
         '
         />
 
-        <div className='flex flex-1 flex-col gap-1'>
+        <div className='flex flex-col gap-2'>
           <h3
             className='
             line-clamp-1
