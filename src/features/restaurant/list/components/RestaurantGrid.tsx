@@ -4,8 +4,15 @@ import { useRestaurants } from '@/features/restaurant/hooks/useRestaurants';
 
 import { RestaurantCard } from '@/features/restaurant/components/RestaurantCard';
 
-export function RestaurantGrid() {
-  const { data, isLoading, isError } = useRestaurants('all');
+import type { RestaurantFilters } from '@/features/restaurant/types/restaurant.types';
+
+type Props = {
+  category: string;
+  filters: RestaurantFilters;
+};
+
+export function RestaurantGrid({ category, filters }: Props) {
+  const { data, isLoading, isError } = useRestaurants(category, filters);
 
   if (isLoading) {
     return <div>Loading...</div>;

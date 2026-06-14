@@ -1,9 +1,14 @@
+'use client';
+
 import { PageContainer } from '@/components/layout/PageContainer';
 
 import { RestaurantFilterSidebar } from '@/features/restaurant/list/components/RestaurantFilterSidebar';
 import { RestaurantGrid } from '@/features/restaurant/list/components/RestaurantGrid';
+import { useRestaurantFilters } from '../hooks/useRestaurantFilters';
 
 export function RestaurantListPage() {
+  const { filters, setFilters } = useRestaurantFilters();
+
   return (
     <PageContainer>
       <section
@@ -31,9 +36,9 @@ export function RestaurantListPage() {
             md:gap-10
           '
         >
-          <RestaurantFilterSidebar />
+          <RestaurantFilterSidebar filters={filters} setFilters={setFilters} />
 
-          <RestaurantGrid />
+          <RestaurantGrid category='all' filters={filters} />
         </div>
       </section>
     </PageContainer>
