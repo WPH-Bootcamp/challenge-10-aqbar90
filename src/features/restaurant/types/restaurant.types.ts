@@ -59,3 +59,14 @@ export type RecommendedRestaurantResponse = {
     recommendations: RecommendedRestaurant[];
   };
 };
+
+export type RestaurantFilters = {
+  location?: string;
+  range?: number;
+  priceMin?: number;
+  priceMax?: number;
+  rating?: number;
+  category?: string;
+  page?: number;
+  limit?: number;
+};

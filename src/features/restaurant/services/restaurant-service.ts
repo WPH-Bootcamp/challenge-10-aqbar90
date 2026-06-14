@@ -1,8 +1,11 @@
 import { api } from '@/lib/api/axios';
 
-import type { RestaurantListResponse } from '../types/restaurant.types';
-
 import type { RecommendedRestaurantResponse } from '../types/restaurant.types';
+
+import type {
+  RestaurantFilters,
+  RestaurantListResponse,
+} from '../types/restaurant.types';
 
 export async function getRecommendedRestaurants() {
   const response =
@@ -11,7 +14,10 @@ export async function getRecommendedRestaurants() {
   return response.data;
 }
 
-export async function getRestaurants(category: string) {
+export async function getRestaurants(
+  category: string,
+  filters?: RestaurantFilters
+) {
   let endpoint = '/resto';
 
   switch (category) {
@@ -32,7 +38,8 @@ export async function getRestaurants(category: string) {
       break;
   }
 
-  const response = await api.get<RestaurantListResponse>(endpoint);
-
+  const response = await api.get<RestaurantListResponse>(endpoint, {
+    params: filters,
+  });
   return response.data;
 }
