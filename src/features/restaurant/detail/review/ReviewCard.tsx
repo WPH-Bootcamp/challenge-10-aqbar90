@@ -16,6 +16,7 @@ export function ReviewCard({ review }: Props) {
   return (
     <article
       className='
+        h-full
         rounded-2xl
         bg-white
         p-4
@@ -29,8 +30,10 @@ export function ReviewCard({ review }: Props) {
           width={64}
           height={64}
           className='
-            h-16
-            w-16
+            h-12
+            w-12
+            md:h-16
+            md:w-16
             rounded-full
             object-cover
           '
@@ -39,7 +42,10 @@ export function ReviewCard({ review }: Props) {
         <div>
           <h3
             className='
-              text-lg
+              text-sm
+              leading-sm
+              md:text-lg
+              md:leading-lg
               font-extrabold
             '
           >
@@ -48,7 +54,10 @@ export function ReviewCard({ review }: Props) {
 
           <p
             className='
-              text-md
+              text-xs
+              leading-text-xs
+              md:text-md
+              md:leading-md
               text-muted-foreground
             '
           >
@@ -68,7 +77,8 @@ export function ReviewCard({ review }: Props) {
           <Star
             key={index}
             className='
-              size-5
+              size-4
+              md:size-5
               fill-[#FFAB0D]
               text-[#FFAB0D]
             '
@@ -78,8 +88,10 @@ export function ReviewCard({ review }: Props) {
 
       <p
         className='
-          text-md
-          leading-md
+          text-sm
+          leading-sm
+          md:text-md
+          md:leading-md
         '
       >
         {review.comment}

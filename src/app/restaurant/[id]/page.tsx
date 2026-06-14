@@ -36,8 +36,10 @@ export default function RestaurantDetailPage({ params }: Props) {
     <PageContainer>
       <div
         className='
-          py-8
-          space-y-8
+          py-6
+          space-y-10
+          md:py-8
+          md:space-y-12
         '
       >
         <RestaurantGallery images={restaurant.images} />

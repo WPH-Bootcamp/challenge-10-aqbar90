@@ -20,8 +20,10 @@ export function RestaurantHeader({
     <section
       className='
         flex
-        items-center
+        items-start
+        md:items-center
         justify-between
+        gap-4
       '
     >
       <div className='flex items-center gap-4'>
@@ -31,16 +33,22 @@ export function RestaurantHeader({
           width={120}
           height={120}
           className='
+            h-22.5
+            w-22.5
+            md:h-30
+            md:w-30
             rounded-full
             object-cover
           '
         />
 
-        <div className='space-y-1'>
+        <div className='min-w-0 space-y-2'>
           <h1
             className='
-              text-display-md
-              leading-display-md
+              text-md
+              leading-md
+              md:text-display-md
+              md:leading-display-md
               font-extrabold
             '
           >
@@ -50,7 +58,8 @@ export function RestaurantHeader({
           <div className='flex items-center gap-1'>
             <Star
               className='
-                size-5
+                size-4
+                md:size-5
                 fill-[#FFAB0D]
                 text-[#FFAB0D]
               '
@@ -58,7 +67,10 @@ export function RestaurantHeader({
 
             <span
               className='
-                text-lg
+                text-sm
+                leading-sm
+                md:text-lg
+                md:leading-lg
                 font-semibold
               '
             >
@@ -71,7 +83,11 @@ export function RestaurantHeader({
               flex
               items-center
               gap-2
-              text-lg
+              text-sm
+              leading-sm
+              md:text-lg
+              md:leading-lg
+              text-muted-foreground
               font-medium
             '
           >
@@ -80,7 +96,7 @@ export function RestaurantHeader({
             {distance && (
               <>
                 <span>•</span>
-                <span>{distance !== undefined && distance !== null} km</span>
+                <span>{distance} km</span>
               </>
             )}
           </div>
@@ -91,16 +107,20 @@ export function RestaurantHeader({
         className='
           flex
           h-11
+          w-11
+          shrink-0
           items-center
+          justify-center
           gap-3
           rounded-full
           border
-          px-4
+          md:w-auto
+          md:px-4
         '
       >
-        <Share2 className='size-5' />
+        <Share2 className='size-4 md:size-5' />
 
-        <span className='font-bold'>Share</span>
+        <span className='hidden font-bold md:block'>Share</span>
       </button>
     </section>
   );

@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 import cartWhite from '@/assets/images/navbar/cart-white.svg';
 import cartBlack from '@/assets/images/navbar/cart-dark.svg';
@@ -6,6 +7,8 @@ import defaultAvatar from '@/assets/images/navbar/default-avatar.svg';
 
 import { useAuthStore } from '@/stores/auth-store';
 import { UserDropdown } from './UserDropDown';
+
+import { useCartTotalItems } from '@/features/cart/stores/cart-store';
 
 type NavbarUserProps = {
   isScrolled: boolean;
@@ -15,20 +18,21 @@ export function NavbarUser({ isScrolled }: NavbarUserProps) {
   const user = useAuthStore((state) => state.user);
   console.log('USER STORE', user);
 
-  const cartCount = 2;
+  const cartCount = useCartTotalItems();
 
   return (
     <div className=' flex items-center gap-6'>
       <div className='relative'>
-        <Image
-          src={isScrolled ? cartBlack : cartWhite}
-          alt='Cart'
-          width={24}
-          height={24}
-        />
-        {cartCount > 0 && (
-          <span
-            className='
+        <Link href='/cart' className='relative cursor-pointer'>
+          <Image
+            src={isScrolled ? cartBlack : cartWhite}
+            alt='Cart'
+            width={24}
+            height={24}
+          />
+          {cartCount > 0 && (
+            <span
+              className='
           absolute
           -right-2
           -top-2
@@ -38,15 +42,16 @@ export function NavbarUser({ isScrolled }: NavbarUserProps) {
           items-center
           justify-center
           rounded-full
-          bg-red-500
+          bg-primary
           text-[10px]
           font-bold
-          text-white
+          text-primary-foreground
         '
-          >
-            {cartCount}
-          </span>
-        )}
+            >
+              {cartCount > 99 ? '99+' : cartCount}
+            </span>
+          )}
+        </Link>
       </div>
       <UserDropdown>
         <button className='flex items-center gap-4 cursor-pointer rounded-full transition-colors hover:bg-black/5 px-3 py-1'>
