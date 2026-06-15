@@ -19,8 +19,8 @@ export function QuantityControl({ quantity, onIncrease, onDecrease }: Props) {
         onClick={onDecrease}
         className='
           flex
-          h-10
-          w-10
+          h-9
+          w-9
           items-center
           justify-center
           rounded-full
@@ -35,8 +35,10 @@ export function QuantityControl({ quantity, onIncrease, onDecrease }: Props) {
       <span
         className='
           min-w-4
-          text-base
-          font-medium
+          text-md
+          leading-md
+          font-semibold
+          tracking-tight
           text-center
         '
       >
@@ -47,8 +49,8 @@ export function QuantityControl({ quantity, onIncrease, onDecrease }: Props) {
         onClick={onIncrease}
         className='
           flex
-          h-10
-          w-10
+          h-9
+          w-9
           items-center
           justify-center
           rounded-full

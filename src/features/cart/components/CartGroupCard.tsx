@@ -3,6 +3,8 @@ import { ChevronRight } from 'lucide-react';
 import type { CartGroup } from '@/features/cart/types/cart.types';
 
 import { CartItemCard } from './CartItemCard';
+import Image from 'next/image';
+import { CartCheckoutButton } from './CartCheckoutButton';
 
 type Props = {
   restaurant: CartGroup;
@@ -14,7 +16,7 @@ export function CartGroupCard({ restaurant }: Props) {
       className='
         rounded-2xl
         bg-white
-        p-5
+        p-4
         shadow-card
       '
     >
@@ -22,21 +24,27 @@ export function CartGroupCard({ restaurant }: Props) {
         className='
           flex
           items-center
-          gap-2
+          gap-1
         '
       >
-        <div
+        <Image
+          src={restaurant.restaurant.logo}
+          alt={restaurant.restaurant.name}
+          width={32}
+          height={32}
           className='
-            h-8
-            w-8
-            rounded-md
-            bg-muted
-          '
+          h-8
+          w-8
+          object-cover
+        '
         />
 
         <span
           className='
-            text-lg
+            text-md
+            leading-md
+            md:text-lg
+            md:leading-lg
             font-bold
           '
         >
@@ -45,7 +53,7 @@ export function CartGroupCard({ restaurant }: Props) {
 
         <ChevronRight className='size-5' />
       </div>
-      <div className='mt-6 space-y-6'>
+      <div className='mt-3 md:mt-6 space-y-3 md:space-y-6'>
         {restaurant.items.map((item) => (
           <CartItemCard key={item.id} item={item} />
         ))}
@@ -53,7 +61,8 @@ export function CartGroupCard({ restaurant }: Props) {
 
       <hr
         className='
-          my-6
+          my-3
+          md:my-6
           border-dashed
           border-border
         '
@@ -62,17 +71,19 @@ export function CartGroupCard({ restaurant }: Props) {
       <div
         className='
         flex
-        items-center
-        justify-between
+        flex-col
+        gap-3
       '
       >
         <div>
-          <p className='text-sm'>Total</p>
+          <p className='text-sm leading-sm font-medium'>Total</p>
 
           <p
             className='
-            text-2xl
+            text-lg
+            leading-lg
             font-extrabold
+            tracking-tight
           '
           >
             Rp
@@ -80,7 +91,7 @@ export function CartGroupCard({ restaurant }: Props) {
           </p>
         </div>
 
-        <div>Checkout Placeholder</div>
+        <CartCheckoutButton restaurantId={restaurant.restaurant.id} />
       </div>
     </div>
   );
