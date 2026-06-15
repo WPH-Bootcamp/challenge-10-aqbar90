@@ -8,6 +8,7 @@ import { useOrders } from '../hooks/useOrders';
 import { useState } from 'react';
 
 import type { Order } from '../types/order.types';
+import ReviewModal from '@/features/review/components/ReviewModal';
 
 export function OrdersPageContent() {
   const [activeStatus, setActiveStatus] = useState('done');
@@ -39,8 +40,9 @@ export function OrdersPageContent() {
   console.log(JSON.stringify(data, null, 2));
 
   return (
-    <section
-      className='
+    <>
+      <section
+        className='
         mx-auto
         max-w-300
         px-4
@@ -48,28 +50,28 @@ export function OrdersPageContent() {
         md:px-30
         md:py-32
       '
-    >
-      <div
-        className='
+      >
+        <div
+          className='
           flex
         
         '
-      >
-        {/* Sidebar */}
-        <div
-          className='
+        >
+          {/* Sidebar */}
+          <div
+            className='
           text-lg
           leading-lg
           font-bold'
-        >
-          <OrdersSidebar />
-        </div>
+          >
+            <OrdersSidebar />
+          </div>
 
-        {/* Content */}
+          {/* Content */}
 
-        <div className='w-full max-w-232'>
-          <h1
-            className='
+          <div className='w-full max-w-232'>
+            <h1
+              className='
             mb-6
             text-display-xs
             leading-display-xs
@@ -77,20 +79,23 @@ export function OrdersPageContent() {
             md:leading-display-md
             font-extrabold
           '
-          >
-            My Orders
-          </h1>
+            >
+              My Orders
+            </h1>
 
-          <OrdersContentCard
-            orders={filteredOrders}
-            activeStatus={activeStatus}
-            onStatusChange={setActiveStatus}
-            isLoading={isLoading}
-            search={search}
-            onSearchChange={setSearch}
-          />
+            <OrdersContentCard
+              orders={filteredOrders}
+              activeStatus={activeStatus}
+              onStatusChange={setActiveStatus}
+              isLoading={isLoading}
+              search={search}
+              onSearchChange={setSearch}
+            />
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <ReviewModal />
+    </>
   );
 }

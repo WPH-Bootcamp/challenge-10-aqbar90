@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import type { Order } from '@/features/orders/types/order.types';
 import { ORDER_STATUS } from '../utils/order-status';
+import { useReviewModal } from '@/features/review/hooks/useReviewModal';
 
 type Props = {
   order: Order;
@@ -22,6 +23,18 @@ export function OrderCard({ order }: Props) {
     `,
   };
   console.log(order.status);
+
+  const { open } = useReviewModal();
+
+  const handleOpenReview = () => {
+    open({
+      transactionId: order.transactionId,
+
+      restaurantId: restaurant.restaurant.id,
+
+      menuIds: restaurant.items.map((item) => item.menuId),
+    });
+  };
 
   return (
     <div
@@ -176,20 +189,20 @@ export function OrderCard({ order }: Props) {
         </div>
 
         <button
+          onClick={handleOpenReview}
           className='
-          
-            h-12
-            w-full
-            rounded-full
-            bg-primary
-            text-md
-            leading-md
-            font-bold
-            text-white
-            md:w-60
-          '
+    h-12
+    w-full
+    rounded-full
+    bg-primary
+    text-md
+    leading-md
+    font-bold
+    text-white
+    md:w-60
+  '
         >
-          View Detail
+          Give Review
         </button>
       </div>
     </div>

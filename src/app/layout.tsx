@@ -4,6 +4,7 @@ import './globals.css';
 
 import Providers from '@/providers/Providers';
 import { AuthHydrator } from '@/components/providers/AuthHydrator';
+import { Toaster } from 'sonner';
 
 export const metadata: Metadata = {
   title: 'Restaurant App',
@@ -21,6 +22,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <Providers>
           <AuthHydrator />
           {children}
+
+          <Toaster />
         </Providers>
       </body>
     </html>
