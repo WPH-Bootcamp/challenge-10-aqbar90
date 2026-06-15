@@ -43,7 +43,7 @@ export function CartItemCard({ item }: Props) {
         flex
         items-center
         justify-between
-        gap-6
+        gap-4
       '
     >
       <div
@@ -67,10 +67,16 @@ export function CartItemCard({ item }: Props) {
           '
         />
 
-        <div>
+        <div
+          className='
+          flex
+          flex-col
+        '
+        >
           <h3
             className='
-              text-base
+              text-sm
+              leading-sm
               font-medium
             '
           >
@@ -79,8 +85,8 @@ export function CartItemCard({ item }: Props) {
 
           <p
             className='
-              mt-1
-              text-lg
+              text-md
+              leading-md
               font-extrabold
             '
           >
