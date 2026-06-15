@@ -1,10 +1,9 @@
 type Props = {
   label: string;
   value: string;
-  bold?: boolean;
 };
 
-export function SuccessSummaryRow({ label, value, bold = true }: Props) {
+export function SuccessSummaryRow({ label, value }: Props) {
   return (
     <div
       className='
@@ -15,8 +14,10 @@ export function SuccessSummaryRow({ label, value, bold = true }: Props) {
     >
       <span
         className='
-          text-md
-          leading-md
+          text-sm
+          leading-sm
+          md:text-md
+          md:leading-md
           font-medium
         '
       >
@@ -25,9 +26,11 @@ export function SuccessSummaryRow({ label, value, bold = true }: Props) {
 
       <span
         className={`
-          text-md
-          leading-md
-          ${bold ? 'font-bold' : 'font-medium'}
+          text-sm
+          leading-sm
+          md:text-md
+          md:leading-md
+          font-semibold
         `}
       >
         {value}

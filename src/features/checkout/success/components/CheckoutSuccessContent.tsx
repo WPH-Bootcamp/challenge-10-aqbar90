@@ -53,7 +53,8 @@ export function CheckoutSuccessContent() {
             max-w-107
             rounded-2xl
             bg-white
-            p-5
+            p-4
+            md:p-5
             shadow-card
           '
         >
@@ -62,7 +63,8 @@ export function CheckoutSuccessContent() {
             className='
               absolute
               -left-2.5
-              top-39.5
+              top-37.5
+              md:top-39.5
               size-5
               rounded-full
               bg-background
@@ -73,7 +75,8 @@ export function CheckoutSuccessContent() {
             className='
               absolute
               -right-2.5
-              top-39.5
+              top-37.5
+              md:top-39.5
               size-5
               rounded-full
               bg-background
@@ -85,7 +88,8 @@ export function CheckoutSuccessContent() {
             className='
               absolute
               -left-2.5
-              top-101
+              top-96.5
+              md:top-101
               size-5
               rounded-full
               bg-background
@@ -96,7 +100,8 @@ export function CheckoutSuccessContent() {
             className='
               absolute
               -right-2.5
-              top-101
+              top-96.5
+              md:top-101
               size-5
               rounded-full
               bg-background
@@ -154,11 +159,16 @@ export function CheckoutSuccessContent() {
               label='Date'
               value={
                 checkoutData?.createdAt
-                  ? new Date(checkoutData.createdAt).toLocaleString('id-ID')
+                  ? new Date(checkoutData.createdAt).toLocaleString('id-ID', {
+                      day: 'numeric',
+                      month: 'long',
+                      year: 'numeric',
+                      hour: '2-digit',
+                      minute: '2-digit',
+                    })
                   : '-'
               }
             />
-
             <SuccessSummaryRow
               label='Payment Method'
               value={checkoutData?.paymentMethod ?? '-'}
@@ -204,8 +214,11 @@ export function CheckoutSuccessContent() {
           >
             <span
               className='
-                text-lg
-                leading-lg
+                text-md
+                leading-md
+                md:text-lg
+                md:leading-lg
+                font-normal
               '
             >
               Total
@@ -213,8 +226,10 @@ export function CheckoutSuccessContent() {
 
             <span
               className='
-                text-lg
-                leading-lg
+                text-md
+                leading-md
+                md:text-lg
+                md:leading-lg
                 font-extrabold
               '
             >
@@ -227,7 +242,7 @@ export function CheckoutSuccessContent() {
             href='/orders'
             className='
               flex
-              h-12
+              h-11
               w-full
               items-center
               justify-center
