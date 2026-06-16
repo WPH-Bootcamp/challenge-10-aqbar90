@@ -2,6 +2,7 @@ import Image from 'next/image';
 
 import logoWhite from '@/assets/images/logo/logo-white.svg';
 import logoRed from '@/assets/icons/logo.svg';
+import Link from 'next/link';
 
 type HomeLogoProps = {
   isScrolled: boolean;
@@ -9,7 +10,7 @@ type HomeLogoProps = {
 
 export function HomeLogo({ isScrolled }: HomeLogoProps) {
   return (
-    <div className='flex items-center gap-5'>
+    <Link href='/dashboard' className='flex items-center gap-5'>
       <Image
         src={isScrolled ? logoRed : logoWhite}
         alt='Foody Logo'
@@ -32,6 +33,6 @@ export function HomeLogo({ isScrolled }: HomeLogoProps) {
       >
         Foody
       </span>
-    </div>
+    </Link>
   );
 }

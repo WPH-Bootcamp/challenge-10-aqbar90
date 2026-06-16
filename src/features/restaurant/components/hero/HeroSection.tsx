@@ -1,10 +1,18 @@
 import Image from 'next/image';
+import { useState } from 'react';
 
 import heroImage from '@/assets/images/home/hero-banner.jpg';
 
 import { Search } from 'lucide-react';
 
+import { useSearchRestaurant } from '@/features/search/hooks/useSearchRestaurant';
+import Link from 'next/link';
+
 export function HeroSection() {
+  const [query, setQuery] = useState('');
+
+  const { data } = useSearchRestaurant(query);
+  console.log('SEARCH RESTAURANTS', data?.data?.restaurants);
   return (
     <section className='relative h-175 md:h-206.75 w-full overflow-hidden'>
       <Image
@@ -54,7 +62,7 @@ export function HeroSection() {
               leading-lg
               md:text-display-xs
               md:leading-display-xs
-              font-bold
+              font-normal
               text-white
             '
           >
@@ -81,6 +89,8 @@ export function HeroSection() {
 
           <input
             type='text'
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
             placeholder='Search restaurants, food and drink'
             className='
               text-sm
@@ -93,6 +103,43 @@ export function HeroSection() {
             '
           />
         </div>
+        {query.trim() && (
+          <div
+            className='
+      w-full
+      max-w-87.25
+      md:max-w-151
+      rounded-full
+      bg-white
+      shadow-lg
+      overflow-hidden
+    '
+          >
+            {data?.data?.restaurants?.length ? (
+              data.data.restaurants.map((restaurant) => (
+                <Link
+                  key={restaurant.id}
+                  href={`/restaurant/${restaurant.id}`}
+                  className='
+            block
+            p-4
+            text-left
+          '
+                >
+                  <p className='font-bold text-black'>{restaurant.name}</p>
+
+                  <p className='text-sm text-muted-foreground'>
+                    {restaurant.place}
+                  </p>
+                </Link>
+              ))
+            ) : (
+              <div className='p-4 text-center text-sm text-muted-foreground'>
+                Restaurant not found
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </section>
   );

@@ -15,6 +15,8 @@ import { useCart } from '@/features/cart/hooks/useCart';
 
 import { useUpdateCart } from '@/features/cart/hooks/useUpdateCart';
 
+import { useDeleteCart } from '@/features/cart/hooks/useDeleteCart';
+
 type Props = {
   restaurantId: number;
   menus: RestaurantMenu[];
@@ -52,6 +54,8 @@ export function RestaurantMenuSection({ menus, restaurantId }: Props) {
       .flatMap((group) => group.items)
       .find((item) => item.menu.id === menuId);
   };
+
+  const { mutate: deleteCart } = useDeleteCart();
 
   return (
     <section
@@ -115,7 +119,9 @@ export function RestaurantMenuSection({ menus, restaurantId }: Props) {
                 return;
               }
 
-              if (cartItem.quantity <= 1) {
+              if (cartItem.quantity === 1) {
+                deleteCart(cartItem.id);
+
                 return;
               }
 
@@ -127,6 +133,7 @@ export function RestaurantMenuSection({ menus, restaurantId }: Props) {
           />
         ))}
         <CheckoutBar
+          restaurantId={restaurantId}
           totalItems={cartData?.data.summary.totalItems ?? 0}
           totalPrice={cartData?.data.summary.totalPrice ?? 0}
         />

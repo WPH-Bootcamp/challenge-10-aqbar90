@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { MapPin, ClipboardList, LogOut } from 'lucide-react';
+import Link from 'next/link';
 
 import {
   DropdownMenu,
@@ -56,8 +57,17 @@ export function UserDropdown({ children }: UserDropdownProps) {
         <DropdownMenuSeparator />
 
         <DropdownMenuItem className='py-3 cursor-pointer'>
-          <MapPin className='size-4' />
-          Delivery Address
+          <Link
+            href='/address'
+            className='
+            flex
+            items-center
+            gap-2
+          '
+          >
+            <MapPin size={24} />
+            <span>Delivery Address</span>
+          </Link>
         </DropdownMenuItem>
 
         <DropdownMenuItem

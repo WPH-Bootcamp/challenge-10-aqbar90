@@ -22,7 +22,7 @@ export async function getRestaurants(
 
   switch (category) {
     case 'nearby':
-      endpoint = '/resto/nearby';
+      endpoint = '/resto';
       break;
 
     case 'best-seller':
@@ -37,6 +37,9 @@ export async function getRestaurants(
       endpoint = '/resto';
       break;
   }
+
+  console.log('CATEGORY', category);
+  console.log('ENDPOINT', endpoint);
 
   const response = await api.get<RestaurantListResponse>(endpoint, {
     params: filters,
