@@ -328,3 +328,5 @@ Total: 100 persen.
 
 Selamat mengerjakan. Kalau ada yang tidak jelas pada flow atau API, baca dulu Swagger
 dan Figma, lalu tanyakan ke mentor.
+
+Deployment Link = https://challenge-10-aqbar90-restaurant-app.vercel.app/
