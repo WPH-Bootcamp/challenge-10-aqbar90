@@ -5,6 +5,7 @@ import './globals.css';
 import Providers from '@/providers/Providers';
 import { AuthHydrator } from '@/components/providers/AuthHydrator';
 import { Toaster } from 'sonner';
+import Footer from '@/components/footer/Footer';
 
 export const metadata: Metadata = {
   title: 'Restaurant App',
@@ -24,6 +25,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           {children}
 
           <Toaster />
+          <Footer />
         </Providers>
       </body>
     </html>

@@ -7,11 +7,15 @@ export default function FooterExplore() {
         flex
         flex-col
         gap-4
+        md:w-50
       '
     >
       <h3
         className='
           text-sm
+          leading-sm
+          md:text-md
+          md:leading-md
           font-extrabold
           text-white
         '
@@ -24,6 +28,10 @@ export default function FooterExplore() {
           key={item}
           className='
             text-sm
+            leading-sm
+            md:text-md
+            md:leading-md
+            md:tracking-tight
             text-white
           '
         >

@@ -7,40 +7,40 @@ export default function Footer() {
   return (
     <footer
       className='
+        border-t
+        border-[#D5D7DA]
         bg-[#0A0D12]
         px-4
-        py-10
+        py-12
         md:px-30
-        md:py-16
+        md:py-20
       '
     >
       <div
         className='
-          mx-auto
           flex
-          max-w-screen-xl
           flex-col
-          gap-6
+          gap-10
+          md:flex-row
+          md:justify-between
+          md:gap-17.25
         '
       >
-        <FooterBrand />
-
-        <FooterSocials />
-
         <div
           className='
             flex
-            gap-4
+            flex-col
+            gap-10
+            md:w-95
           '
         >
-          <div className='flex-1'>
-            <FooterExplore />
-          </div>
-
-          <div className='flex-1'>
-            <FooterHelp />
-          </div>
+          <FooterBrand />
+          <FooterSocials />
         </div>
+
+        <FooterExplore />
+
+        <FooterHelp />
       </div>
     </footer>
   );
