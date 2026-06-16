@@ -23,6 +23,8 @@ export default function FooterSocials() {
         flex
         flex-col
         gap-5
+        md:flex-row
+        md:gap-3
       '
     >
       <p
@@ -63,30 +65,10 @@ export default function FooterSocials() {
                 hover:bg-white/10
               '
             >
-              <Icon className='h-5 w-5 text-white' />
+              <Icon className='size-5 text-white' />
             </a>
           );
         })}
-
-        <a
-          href='#'
-          target='_blank'
-          rel='noopener noreferrer'
-          className='
-            flex
-            h-10
-            w-10
-            items-center
-            justify-center
-            rounded-full
-            border
-            border-[#252B37]
-            transition-colors
-            hover:bg-white/10
-          '
-        >
-          <FaTiktok className='h-5 w-5 text-white' />
-        </a>
       </div>
     </div>
   );

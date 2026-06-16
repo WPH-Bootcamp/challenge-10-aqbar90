@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import logo from '@/assets/images/logo.svg';
+import logo from '@/assets/icons/logo.svg';
 
 export default function FooterBrand() {
   return (
@@ -35,7 +35,10 @@ export default function FooterBrand() {
       <p
         className='
           text-sm
-          leading-7
+          leading-sm
+          md:text-md
+          md:leading-md
+          md:tracking-tight
           text-white
         '
       >
