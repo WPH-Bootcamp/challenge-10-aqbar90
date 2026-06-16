@@ -10,10 +10,15 @@ export function useDeleteCart() {
   return useMutation({
     mutationFn: deleteCartItem,
 
-    onSuccess: () => {
+    onSuccess: (data) => {
+      console.log('DELETE SUCCESS', data);
+
       queryClient.invalidateQueries({
         queryKey: ['cart'],
       });
+    },
+    onError: (error) => {
+      console.log('DELETE ERROR', error);
     },
   });
 }

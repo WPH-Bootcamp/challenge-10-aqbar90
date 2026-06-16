@@ -1,10 +1,12 @@
 import Image from 'next/image';
 
 import Logo from '@/assets/icons/logo.svg';
+import Link from 'next/link';
 
 export function SuccessHeader() {
   return (
-    <div
+    <Link
+      href='/dashboard'
       className='
         flex
         items-center
@@ -22,6 +24,6 @@ export function SuccessHeader() {
       >
         Foody
       </h1>
-    </div>
+    </Link>
   );
 }

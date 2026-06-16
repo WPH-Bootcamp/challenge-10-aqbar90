@@ -7,6 +7,7 @@ import { useAuthStore } from '@/stores/auth-store';
 import { HomeLogo } from './HomeLogo';
 import { NavbarGuest } from './NavbarGuest';
 import { NavbarUser } from './NavbarUser';
+import { usePathname } from 'next/navigation';
 
 export function HomeNavbar() {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
@@ -25,6 +26,18 @@ export function HomeNavbar() {
     };
   }, []);
 
+  const pathname = usePathname();
+
+  const forceWhiteNavbar =
+    pathname.startsWith('/restaurant/') ||
+    pathname.startsWith('/profile') ||
+    pathname.startsWith('/orders') ||
+    pathname.startsWith('/cart') ||
+    pathname.startsWith('/checkout') ||
+    pathname.startsWith('/address');
+
+  const navbarScrolled = isScrolled || forceWhiteNavbar;
+
   return (
     <header
       className={`
@@ -35,7 +48,7 @@ export function HomeNavbar() {
         w-full
         transition-all
         duration-300
-        ${isScrolled ? 'bg-white shadow-md' : 'bg-transparent'}
+        ${navbarScrolled ? 'bg-white shadow-md' : 'bg-transparent'}
       `}
     >
       <div
@@ -50,10 +63,10 @@ export function HomeNavbar() {
           md:px-30
         '
       >
-        <HomeLogo isScrolled={isScrolled} />
+        <HomeLogo isScrolled={navbarScrolled} />
 
         {isAuthenticated ? (
-          <NavbarUser isScrolled={isScrolled} />
+          <NavbarUser isScrolled={navbarScrolled} />
         ) : (
           <NavbarGuest />
         )}

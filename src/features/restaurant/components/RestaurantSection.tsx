@@ -17,6 +17,7 @@ export function RestaurantSection() {
   const [visibleCount, setVisibleCount] = useState(INITIAL_LIMIT);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setVisibleCount(INITIAL_LIMIT);
   }, [selectedCategory]);
 

@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+
 import { useAuthStore } from '@/stores/auth-store';
 import Image from 'next/image';
 
@@ -64,7 +66,8 @@ export function OrdersSidebar() {
     gap-6
   '
       >
-        <button
+        <Link
+          href='/address'
           className='
       flex
       items-center
@@ -78,7 +81,7 @@ export function OrdersSidebar() {
           <MapPin size={24} />
 
           <span>Delivery Address</span>
-        </button>
+        </Link>
 
         <button
           className='

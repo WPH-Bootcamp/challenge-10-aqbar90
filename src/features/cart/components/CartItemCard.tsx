@@ -25,7 +25,11 @@ export function CartItemCard({ item }: Props) {
   };
 
   const handleDecrease = () => {
+    console.log('CLICK MINUS', item.id, item.quantity);
+
     if (item.quantity === 1) {
+      console.log('DELETE TRIGGERED');
+
       removeItem(item.id);
 
       return;

@@ -4,12 +4,15 @@ import CartIcon from '@/assets/images/navbar/cart-dark.svg';
 
 import { PageContainer } from '@/components/layout/PageContainer';
 
+import Link from 'next/link';
+
 type Props = {
+  restaurantId: number;
   totalItems: number;
   totalPrice: number;
 };
 
-export function CheckoutBar({ totalItems, totalPrice }: Props) {
+export function CheckoutBar({ totalItems, totalPrice, restaurantId }: Props) {
   if (totalItems === 0) {
     return null;
   }
@@ -60,7 +63,8 @@ export function CheckoutBar({ totalItems, totalPrice }: Props) {
             </p>
           </div>
 
-          <button
+          <Link
+            href={`/checkout?restaurantId=${restaurantId}`}
             className='
             rounded-full
             bg-primary
@@ -73,7 +77,7 @@ export function CheckoutBar({ totalItems, totalPrice }: Props) {
           '
           >
             Checkout
-          </button>
+          </Link>
         </div>
       </PageContainer>
     </div>

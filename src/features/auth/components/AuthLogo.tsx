@@ -1,6 +1,7 @@
 import Image from 'next/image';
 
 import logo from '@/assets/icons/logo.svg';
+import Link from 'next/link';
 
 type AuthLogoProps = {
   size?: 'desktop' | 'mobile';
@@ -19,7 +20,7 @@ export function AuthLogo({ size = 'desktop' }: AuthLogoProps) {
         };
   {
     return (
-      <div className='flex items-center gap-3.75'>
+      <Link href='/dashboard' className='flex items-center gap-3.75'>
         <Image
           src={logo}
           alt='Foody Logo'
@@ -31,7 +32,7 @@ export function AuthLogo({ size = 'desktop' }: AuthLogoProps) {
         <span className=' text-display-sm leading-display-sm lg:text-display-md lg:leading-display-md font-extrabold font-sans text-foreground'>
           Foody
         </span>
-      </div>
+      </Link>
     );
   }
 }

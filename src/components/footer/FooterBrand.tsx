@@ -1,6 +1,7 @@
 import Image from 'next/image';
 
 import logo from '@/assets/icons/logo.svg';
+import Link from 'next/link';
 
 export default function FooterBrand() {
   return (
@@ -11,7 +12,8 @@ export default function FooterBrand() {
         gap-4
       '
     >
-      <div
+      <Link
+        href='/dashboard'
         className='
           flex
           items-center
@@ -30,7 +32,7 @@ export default function FooterBrand() {
         >
           Foody
         </h2>
-      </div>
+      </Link>
 
       <p
         className='
